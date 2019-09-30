@@ -25,6 +25,6 @@ management:
         enabled: true
   endpoints:
     web:
-      base-path: /user/actuator
+      base-path: /cliente/actuator
       exposure:
         include: '*'

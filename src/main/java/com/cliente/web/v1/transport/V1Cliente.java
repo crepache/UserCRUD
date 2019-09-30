@@ -1,48 +1,27 @@
-package com.user.model;
+package com.cliente.web.v1.transport;
 
+import com.cliente.model.Cliente;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-@Document(collection = "user")
-public class User {
+public class V1Cliente {
 
-  @Id
   private String id;
 
   @Size(max = 255, message = "Campo NOME obrigatorio entre 0 and 255")
-  @NotBlank(message = "Campo NOME nao pode ser vazio")
   private String nome;
 
   @Size(max = 30, message = "Campo CPF obrigatorio entre 0 and 30")
-  @NotBlank(message = "Campo CPF nao pode ser vazio")
   private String cpf;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   @JsonFormat(pattern = "dd/MM/yyyy")
   private Date dataDeNascimento;
-
-  public User() {
-  }
-
-  public User(String id,
-      @Size(max = 255, message = "Campo NOME obrigatorio entre 0 and 255") @NotBlank(
-          message = "Campo NOME nao pode ser vazio") String nome,
-      @Size(max = 30, message = "Campo CPF obrigatorio entre 0 and 30") @NotBlank(
-          message = "Campo CPF nao pode ser vazio") String cpf,
-      @NotBlank(message = "Campo DATA DE NASCIMENTO nao pode ser vazio") Date dataDeNascimento) {
-    this.id = id;
-    this.nome = nome;
-    this.cpf = cpf;
-    this.dataDeNascimento = dataDeNascimento;
-  }
 
   public String getId() {
     return id;
@@ -75,4 +54,9 @@ public class User {
   public void setDataDeNascimento(Date dataDeNascimento) {
     this.dataDeNascimento = dataDeNascimento;
   }
+
+  public Cliente toCliente() {
+    return new ModelMapper().map(this, Cliente.class);
+  }
+
 }

@@ -1,15 +1,15 @@
-# UserCRUD
-User CRUD using Spring Boot + MongoDB
+# Cliente CRUD
+CRUD de Clientes usando Spring Boot e MongoDB
 
-### Requirements
+### Requerimentos
 - Java 8
 - Docker
 - Kubernetes
 
-### Start the application
-- Go to docker and run the sh start_mongoDB.sh
-- Run only class UserApplication
+### Start da aplicaç~ao
+- Va para a pasta do docker e rodar o sh start_mongoDB.sh 
+- On Intellij rode o main ClienteApplication 
 
-### Check the application sanity
+### Checar se a aplicacao esta rodando e o seu estado
 
-- Go to url: http://localhost:9443/user/actuator/health and check the status is "up".
+- Va para a url: http://localhost:9443/cliente/actuator/health e check se o status esta "up".
