@@ -58,9 +58,6 @@
             <artifactId>spring-data-rest-webmvc</artifactId>
             <version>3.1.10.RELEASE</version>
         </dependency>
-
-
-		<!--Activate when I do the documentation for the API-->
 		<!--<dependency>-->
 			<!--<groupId>io.springfox</groupId>-->
 			<!--<artifactId>springfox-swagger2</artifactId>-->

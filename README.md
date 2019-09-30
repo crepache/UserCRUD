@@ -13,3 +13,9 @@ CRUD de Clientes usando Spring Boot e MongoDB
 ### Checar se a aplicacao esta rodando e o seu estado
 
 - Va para a url: http://localhost:9443/cliente/actuator/health e check se o status esta "up".
+
+### TO DO
+- Unit tests
+- Swagger para documentar todas APIs
+- Schema para mapear todas exceptions
+- Configurar um certificado para subir com https
