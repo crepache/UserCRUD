@@ -5,6 +5,7 @@ import com.user.response.Response;
 import com.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,8 +52,7 @@ public class UserController {
   }
 
   @DeleteMapping("/{id}")
-  public void delete(@PathVariable String id) {
-    userService.delete(id);
-
+  public ResponseEntity delete(@PathVariable String id) {
+    return userService.delete(id);
   }
 }

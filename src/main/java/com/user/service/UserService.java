@@ -88,7 +88,18 @@ public class UserService {
     }
   }
 
-  public void delete(String id) {
+  public ResponseEntity<Response<User>> delete(String id) {
+    Response<User> response = new Response<>();
+    Optional<User> user = userRepository.findById(id);
+
+    if (!user.isPresent()) {
+      response.getErrors().add("Usuario não encontrado com o id = " + id);
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    response.setData(user.get());
     userRepository.deleteById(id);
+
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
   }
 }
