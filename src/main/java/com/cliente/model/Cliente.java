@@ -18,27 +18,16 @@ public class Cliente {
   @Id
   private String id;
 
-  @Size(max = 255, message = "Campo NOME obrigatorio entre 0 and 255")
-  @NotBlank(message = "Campo NOME nao pode ser vazio")
   private String nome;
 
-  @Size(max = 30, message = "Campo CPF obrigatorio entre 0 and 30")
-  @NotBlank(message = "Campo CPF nao pode ser vazio")
   private String cpf;
 
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date dataDeNascimento;
 
   public Cliente() {
   }
 
-  public Cliente(String id,
-      @Size(max = 255, message = "Campo NOME obrigatorio entre 0 and 255") @NotBlank(
-          message = "Campo NOME nao pode ser vazio") String nome,
-      @Size(max = 30, message = "Campo CPF obrigatorio entre 0 and 30") @NotBlank(
-          message = "Campo CPF nao pode ser vazio") String cpf,
-      @NotBlank(message = "Campo DATA DE NASCIMENTO nao pode ser vazio") Date dataDeNascimento) {
+  public Cliente(String id, String nome, String cpf, Date dataDeNascimento) {
     this.id = id;
     this.nome = nome;
     this.cpf = cpf;

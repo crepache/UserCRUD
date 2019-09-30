@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class V1Cliente {
@@ -14,9 +15,11 @@ public class V1Cliente {
   private String id;
 
   @Size(max = 255, message = "Campo NOME obrigatorio entre 0 and 255")
+  @NotBlank(message = "Campo NOME nao pode ser vazio")
   private String nome;
 
   @Size(max = 30, message = "Campo CPF obrigatorio entre 0 and 30")
+  @NotBlank(message = "Campo CPF nao pode ser vazio")
   private String cpf;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
