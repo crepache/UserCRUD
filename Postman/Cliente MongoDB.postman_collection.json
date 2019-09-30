@@ -1,0 +1,221 @@
+{
+	"id": "252cf48f-916a-b93a-1564-7cfde97a1ac6",
+	"name": "Cliente MongoDB",
+	"description": "",
+	"order": [
+		"c161239a-41c8-0099-d566-2af1833410ec",
+		"9231bada-4e12-6fc7-0081-0dd6d4c97f88",
+		"820a1e29-04a7-36b1-1be7-f5c8c78c95ec",
+		"baa91509-e8a6-39d1-f722-704867a14fb5",
+		"44cc8c10-d6ef-7c48-458f-bf7ca54c5134",
+		"cbb227a4-11aa-2586-7035-a9983b2e06e7",
+		"95901969-ac7f-2412-0386-b25fd677906d"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1569262468755,
+	"owner": "718747",
+	"public": false,
+	"requests": [
+		{
+			"id": "44cc8c10-d6ef-7c48-458f-bf7ca54c5134",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8443/cliente/5d9143820d072c130f927f09",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1569805352589,
+			"name": "Get Cliente",
+			"description": "",
+			"collectionId": "252cf48f-916a-b93a-1564-7cfde97a1ac6",
+			"responses": []
+		},
+		{
+			"id": "820a1e29-04a7-36b1-1be7-f5c8c78c95ec",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8443/cliente/5d9154400d072c35aec35885",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PATCH",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1569810594797,
+			"name": "Update Cliente Parcial",
+			"description": "",
+			"collectionId": "252cf48f-916a-b93a-1564-7cfde97a1ac6",
+			"responses": [],
+			"rawModeData": "{\n\t\"nome\" : \"cassiano\"\n}"
+		},
+		{
+			"id": "9231bada-4e12-6fc7-0081-0dd6d4c97f88",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8443/cliente/5d9154400d072c35aec35885",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1569805449466,
+			"name": "Update Cliente",
+			"description": "",
+			"collectionId": "252cf48f-916a-b93a-1564-7cfde97a1ac6",
+			"responses": [],
+			"rawModeData": "{\n\t\"nome\" : \"test\",\n\t\"cpf\" : \"test\",\n\t\"dataDeNascimento\": \"23/01/1987\"\n}"
+		},
+		{
+			"id": "95901969-ac7f-2412-0386-b25fd677906d",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8443/cliente?page=0",
+			"queryParams": [
+				{
+					"key": "page",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1569805450338,
+			"name": "Get All Cliente with Pageable",
+			"description": "",
+			"collectionId": "252cf48f-916a-b93a-1564-7cfde97a1ac6",
+			"responses": []
+		},
+		{
+			"id": "baa91509-e8a6-39d1-f722-704867a14fb5",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8443/cliente/5d9168660d072c5ff8e2b755",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1569810595514,
+			"name": "Delete Cliente",
+			"description": "",
+			"collectionId": "252cf48f-916a-b93a-1564-7cfde97a1ac6",
+			"responses": []
+		},
+		{
+			"id": "c161239a-41c8-0099-d566-2af1833410ec",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8443/cliente",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1569805375061,
+			"name": "Create Cliente",
+			"description": "",
+			"collectionId": "252cf48f-916a-b93a-1564-7cfde97a1ac6",
+			"responses": [],
+			"rawModeData": "{\n\t\"nome\" : \"Cassiano\",\n\t\"cpf\" : \"361.437.168-97\",\n\t\"dataDeNascimento\" : 123142342342\n}"
+		},
+		{
+			"id": "cbb227a4-11aa-2586-7035-a9983b2e06e7",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8443/cliente?page=0?size=2",
+			"queryParams": [
+				{
+					"key": "page",
+					"value": "0?size=2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1569805369106,
+			"name": "Get All Cliente",
+			"description": "",
+			"collectionId": "252cf48f-916a-b93a-1564-7cfde97a1ac6",
+			"responses": []
+		}
+	]
+}
