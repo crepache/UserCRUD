@@ -4,6 +4,8 @@ import com.user.model.User;
 import com.user.repository.UserRepository;
 import com.user.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -50,7 +52,7 @@ public class UserService {
     Optional<User> userMongo = userRepository.findById(id);
 
     if (!userMongo.isPresent()) {
-      response.getErrors().add("Pessoa não encontra com o id = " + id);
+      response.getErrors().add("Usuario não encontrado com o id = " + id);
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
@@ -64,20 +66,17 @@ public class UserService {
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }
 
-  public ResponseEntity<Response<List<User>>> listAll() {
-    Response<List<User>> response = new Response<>();
-    List<User> userList = userRepository.findAll();
-    response.setData(userList);
+  public ResponseEntity<?> listAll(Pageable pageable) {
+    Page<User> allUsers = userRepository.findAll(pageable);
 
-    if (response.getData().isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    if (allUsers.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(allUsers);
     }
 
-    return ResponseEntity.status(HttpStatus.OK).body(response);
+    return ResponseEntity.status(HttpStatus.OK).body(allUsers);
   }
 
-  public ResponseEntity<Response<User>> listUser(String id) {
-
+  public ResponseEntity<Response<User>> getUser(String id) {
     Response<User> response = new Response<>();
     Optional<User> user = userRepository.findById(id);
 

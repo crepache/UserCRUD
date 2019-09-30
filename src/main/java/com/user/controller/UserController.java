@@ -4,6 +4,7 @@ import com.user.model.User;
 import com.user.response.Response;
 import com.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,12 +29,12 @@ public class UserController {
 
   @GetMapping("{id}")
   public ResponseEntity<Response<User>> getUser(@Valid @PathVariable("id") String id) {
-    return userService.listUser(id);
+    return userService.getUser(id);
   }
 
   @GetMapping()
-  public ResponseEntity<Response<List<User>>> listAll() {
-    return userService.listAll();
+  public ResponseEntity<?> listAll(Pageable pageable) {
+    return userService.listAll(pageable);
   }
 
   @PostMapping
@@ -53,5 +53,6 @@ public class UserController {
   @DeleteMapping("/{id}")
   public void delete(@PathVariable String id) {
     userService.delete(id);
+
   }
 }
