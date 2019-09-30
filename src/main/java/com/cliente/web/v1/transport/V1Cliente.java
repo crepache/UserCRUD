@@ -61,5 +61,4 @@ public class V1Cliente {
   public Cliente toCliente() {
     return new ModelMapper().map(this, Cliente.class);
   }
-
 }

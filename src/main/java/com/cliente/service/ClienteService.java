@@ -1,33 +1,25 @@
 package com.cliente.service;
 
+import com.cliente.exception.BadRequestException;
+import com.cliente.exception.NotFoundException;
 import com.cliente.model.Cliente;
+import com.cliente.model.Error;
 import com.cliente.repository.ClienteRepository;
 import com.cliente.response.Response;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.rest.webmvc.json.DomainObjectReader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.util.Optional;
 
 
 @Service
 public class ClienteService {
-
-  private ObjectMapper mapper;
-
-  private DomainObjectReader domainObjectReader;
 
   @Autowired
   private ClienteRepository clienteRepository;
@@ -36,35 +28,31 @@ public class ClienteService {
     this.clienteRepository = clienteRepository;
   }
 
-  public ResponseEntity<Response<Cliente>> insert(Cliente cliente, BindingResult result) {
-    Response<Cliente> response = new Response<>();
-
+  public Cliente create(Cliente cliente, BindingResult result) {
     if (result.hasErrors()) {
+      Response<Cliente> response = new Response<>();
       result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+      throw new BadRequestException(response);
     }
 
     clienteRepository.save(cliente);
-    response.setData(cliente);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    return cliente;
   }
 
 
-  public ResponseEntity<Response<Cliente>> update(String id, Cliente cliente, BindingResult result) {
-
+  public Cliente update(String id, Cliente cliente, BindingResult result) {
     Response<Cliente> response = new Response<>();
 
     if (result.hasErrors()) {
       result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+      throw new BadRequestException(response);
     }
 
     Optional<Cliente> clienteMongo = clienteRepository.findById(id);
 
     if (!clienteMongo.isPresent()) {
-      response.getErrors().add("Usuario não encontrado com o id = " + id);
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+      response.getErrors().add("Cliente não encontrado com o id = " + id);
+      throw new NotFoundException(response);
     }
 
     clienteMongo.get().setNome(cliente.getNome());
@@ -72,18 +60,16 @@ public class ClienteService {
     clienteMongo.get().setDataDeNascimento(cliente.getDataDeNascimento());
     clienteRepository.save(clienteMongo.get());
 
-    response.setData(clienteMongo.get());
-
-    return ResponseEntity.status(HttpStatus.OK).body(response);
+    return clienteMongo.get();
   }
 
-  public ResponseEntity<Response<Cliente>> partialUpdate(String id, Cliente clienteParcial, BindingResult result) {
-    Response<Cliente> response = new Response<>();
+  public Cliente partialUpdate(String id, Cliente clienteParcial, BindingResult result) {
     Optional<Cliente> clienteMongo = clienteRepository.findById(id);
 
     if (!clienteMongo.isPresent()) {
-      response.getErrors().add("Usuario não encontrado com o id = " + id);
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+      Response<Cliente> response = new Response<>();
+      response.getErrors().add("Cliente não encontrado com o id = " + id);
+      throw new NotFoundException(response);
     }
 
 //    Cliente patched = domainObjectReader.read(clienteParcial, clienteMongo.get(), mapper);
@@ -95,45 +81,45 @@ public class ClienteService {
     patched.setDataDeNascimento(clienteParcial.getDataDeNascimento() != null ? clienteParcial.getDataDeNascimento() : clienteMongo.get().getDataDeNascimento());
     clienteRepository.save(patched);
 
-    response.setData(patched);
-
-    return ResponseEntity.status(HttpStatus.OK).body(response);
+    return patched;
   }
 
-  public ResponseEntity<?> listAll(Pageable pageable) {
+  public Page<Cliente> listAll(Pageable pageable) {
     Page<Cliente> todosClientes = clienteRepository.findAll(pageable);
 
     if (todosClientes.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(todosClientes);
+      Response response = new Response();
+      response.getErrors().add("Nenhum Cliente encontrado");
+      throw new NotFoundException(response);
     }
 
-    return ResponseEntity.status(HttpStatus.OK).body(todosClientes);
+    return todosClientes;
   }
 
-  public ResponseEntity<Response<Cliente>> get(String id) {
-    Response<Cliente> response = new Response<>();
+  public Cliente get(String id) {
     Optional<Cliente> cliente = clienteRepository.findById(id);
 
-    if (cliente.isPresent()) {
-      response.setData(cliente.get());
-      return ResponseEntity.status(HttpStatus.OK).body(response);
-    } else {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    if (!cliente.isPresent()) {
+      Response<Cliente> response = new Response<>();
+      response.getErrors().add("Cliente nao encontrado!");
+      throw new NotFoundException(response);
     }
+
+    return cliente.get();
   }
 
-  public ResponseEntity<Response<Cliente>> delete(String id) {
+  public Boolean delete(String id) {
     Response<Cliente> response = new Response<>();
     Optional<Cliente> cliente = clienteRepository.findById(id);
 
     if (!cliente.isPresent()) {
       response.getErrors().add("Cliente não encontrado com o id = " + id);
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+      throw new NotFoundException(response);
     }
 
     response.setData(cliente.get());
     clienteRepository.deleteById(id);
 
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+    return Boolean.TRUE;
   }
 }

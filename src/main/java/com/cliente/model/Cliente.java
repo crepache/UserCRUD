@@ -1,6 +1,8 @@
 package com.cliente.model;
 
+import com.cliente.web.v1.transport.V1Cliente;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -64,5 +66,9 @@ public class Cliente {
 
   public void setDataDeNascimento(Date dataDeNascimento) {
     this.dataDeNascimento = dataDeNascimento;
+  }
+
+  public V1Cliente toV1Cliente() {
+    return new ModelMapper().map(this, V1Cliente.class);
   }
 }
