@@ -1,5 +1,6 @@
 package com.cliente.web.v1.transport;
 
+import com.cliente.Utils;
 import com.cliente.model.Cliente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.modelmapper.ModelMapper;
@@ -25,6 +26,8 @@ public class V1Cliente {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   @JsonFormat(pattern = "dd/MM/yyyy")
   private Date dataDeNascimento;
+
+  private int idade;
 
   public String getId() {
     return id;
@@ -60,5 +63,9 @@ public class V1Cliente {
 
   public Cliente toCliente() {
     return new ModelMapper().map(this, Cliente.class);
+  }
+
+  public int getIdade() {
+    return Utils.calculaIdade(getDataDeNascimento(), "dd/MM/yyyy");
   }
 }
